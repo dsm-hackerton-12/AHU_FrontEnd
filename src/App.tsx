@@ -1,18 +1,14 @@
-import { useState } from 'react'
+import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
+import Router from "./Router";
 
 function App() {
-  const [count, setCount] = useState(0);
+  const queryClient = new QueryClient();
 
   return (
-    <>
-      <span>
-        선우가 과연 리액트를 잘할 수 있을 것인가?? {count}
-      </span>
-      <button onClick={() => setCount(count+1)}>
-        count += 1
-      </button>
-    </>
-  )
+    <QueryClientProvider client={queryClient}>
+      <Router />
+    </QueryClientProvider>
+  );
 }
 
 export default App;
