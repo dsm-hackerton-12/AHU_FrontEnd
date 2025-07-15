@@ -35,11 +35,4 @@ function TopTextLayer({title, text}: Props) {
     padding-left: 24px;
   `
 
-const TopText = styled.span`
-  font-size: 27px;
-  font-weight: 400px;
-  color: #C492F1;
-  padding-left: 57px;
-`
-
 export default TopTextLayer
