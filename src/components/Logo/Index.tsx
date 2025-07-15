@@ -7,7 +7,6 @@ export default function Logo() {
     <>
       <S.Container>
         <img src={LogoImg} alt="" />
-        <S.GradientText>AHU</S.GradientText>
       </S.Container>
     </>
   );

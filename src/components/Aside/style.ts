@@ -9,7 +9,7 @@ export const Container = styled.div`
   flex-direction: column;
   border-right: 1px solid #C492F1;
   width: 16vw;
-  height: 100vh;
+  height: 93vh;
   padding: 20px;
   gap: 10px;
 `;
@@ -32,6 +32,41 @@ export const Btn = styled.div<BtnProps>`
 
   p {
     font-weight: 500;
-    color: ${({ isSelected }) => (isSelected ? "#FFFFFF" : "#000000")}; /* ✅ 글자색도 변경 */
+    color: ${({ isSelected }) => (isSelected ? "#FFFFFF" : "#000000")};
   }
 `;
+
+export const MenuWrapper = styled.div`
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE, Edge */
+  &::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+  }
+`;
+
+export const ProfileContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+`
+
+export const ProfileUser = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  p {
+    margin: 0;
+  }
+`
+
+export const LogoutContainer = styled.div`
+  display: flex;
+  gap: 10px;
+  cursor: pointer;
+`
