@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { colorStyle, fontStyles } from "../styles";
+import { colorStyle, fontStyles } from "../../styles";
 
 interface FontPropsType {
   text?: string;
