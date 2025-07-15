@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "@emotion/styled"
 
 interface Props {
@@ -15,25 +14,25 @@ function TopTextLayer({title, text}: Props) {
   )
 }
   const TopContainer = styled.div`
-    width: 1268px;
-    height: 152px;
+    width: 60vw;
     border: 3px solid #D8ADFF;
     border-radius: 30px;
+    padding: 2vw;
   `
 
   const  TopTitle = styled.h2`
-    font-size: 40px;
+    font-size: 32px;
     font-weight: 600px;
     color: #8338E9;
-    padding: 22px 0 6px 57px;
+    padding-left: 24px;
     margin: 0;
   `
   
   const TopText = styled.span`
-    font-size: 27px;
+    font-size: 23px;
     font-weight: 400px;
     color: #C492F1;
-    padding-left: 57px;
+    padding-left: 24px;
   `
 
   export default TopTextLayer
