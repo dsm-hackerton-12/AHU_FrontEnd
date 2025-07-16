@@ -15,9 +15,9 @@ import ClickedWriteIcon from "../../assets/SVG/ClickedAddBoard.svg";
 import ClickedMyIcon from "../../assets/SVG/ClickedMy.svg";
 
 export const asideIcons = [
-  { id: 1, key: "home", label: "홈", icon: HomeIcon, clickedIcon: ClickedHomeIcon },
-  { id: 2, key: "search", label: "검색", icon: SearchIcon, clickedIcon: ClickedSearchIcon },
-  { id: 3, key: "vote", label: "투표율", icon: VoteIcon, clickedIcon: ClickedVoteIcon },
-  { id: 4, key: "write", label: "글 등록", icon: WriteIcon, clickedIcon: ClickedWriteIcon },
-  { id: 5, key: "my", label: "마이페이지", icon: MyIcon, clickedIcon: ClickedMyIcon },
+  { id: 1, key: "home", label: "홈", icon: HomeIcon, clickedIcon: ClickedHomeIcon, path: "/" },
+  { id: 2, key: "search", label: "검색", icon: SearchIcon, clickedIcon: ClickedSearchIcon, path: "/search" },
+  { id: 3, key: "vote", label: "투표율", icon: VoteIcon, clickedIcon: ClickedVoteIcon, path: "/vote" },
+  { id: 4, key: "write", label: "글 등록", icon: WriteIcon, clickedIcon: ClickedWriteIcon, path: "/write" },
+  { id: 5, key: "my", label: "마이페이지", icon: MyIcon, clickedIcon: ClickedMyIcon, path: "/my" },
 ]; 

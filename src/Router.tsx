@@ -1,25 +1,21 @@
-import styled from "@emotion/styled"
 import { BrowserRouter, Routes, Route } from "react-router-dom"
-import Home from "./pages/Home"
-import Aside from "./components/Aside/Index"
-import Search from "./pages/Search"
-
-const Body = styled.div`
-  display: flex;
-  gap: 9vw;
-  height: 100vh;
-`
+import AsideLayout from "./components/Layout/AsideLayout";
+import Profile from "./pages/MyPage";
+import Vote from "./pages/Vote";
+import Home from "./pages/home";
+import Search from "./pages/Search";
 
 export default function Router() {
   return (
     <BrowserRouter>
-      <Body>
-        <Aside />
-        <Routes>
+      <Routes>
+        <Route element={<AsideLayout />} >
           <Route path="/" element={<Home />} />
+          <Route path="/My" element={<Profile />} />
+          <Route path="/vote" element={<Vote />} />
           <Route path="/search" element={<Search />} />
-        </Routes>
-      </Body>
+        </Route>
+      </Routes>
     </BrowserRouter>
   )
 }
