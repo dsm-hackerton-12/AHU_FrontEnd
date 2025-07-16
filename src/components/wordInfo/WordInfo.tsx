@@ -6,6 +6,7 @@ function WordInfo() {
   const [Inputvalue, setInputValue] = useState('')
   const [categoryText, setCategoryText] = useState(true)
   const [category, setCategory] = useState(false)
+  const optionArr = ["개발", "디자인", "비지니스", "기술", "마케팅", "기타"]
 
   function DropDownOpen() {
     setCategory(true);
@@ -36,12 +37,13 @@ function WordInfo() {
           </CategoryInput>
           {category && (
             <OptionBox>
-              <Option onClick={() => {DropDownClose("개발")}}>개발</Option>
-              <Option onClick={() => {DropDownClose("디자인")}}>디자인</Option>
-              <Option onClick={() => {DropDownClose("비지니스")}}>비지니스</Option>
-              <Option onClick={() => {DropDownClose("기술")}}>기술</Option>
-              <Option onClick={() => {DropDownClose("마케팅")}}>마케팅</Option>
-              <Option onClick={() => {DropDownClose("기타")}}>기타</Option>
+              {optionArr.map(e => {
+                return (
+                  <>
+                    <Option>{e}</Option>
+                  </>
+                )
+              })}
             </OptionBox>)}
         </FormBox>
         <FormBox>
@@ -112,6 +114,10 @@ const CategoryInput = styled.div`
   height: 70px;
   display: flex;
   align-items: center;
+
+  &:hover{
+    cursor: pointer;
+  }
 `
 const CategoryInputText = styled.span`
   font-size: 25px;
@@ -130,6 +136,7 @@ const Option = styled.span`
   &:hover{
     background-color: #FFF2F9;
     border-radius: 15px;
+    cursor: pointer;
   } 
 `
 const OptionBox = styled.div`
