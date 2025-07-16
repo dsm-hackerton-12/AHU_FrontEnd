@@ -9,7 +9,7 @@ export const Container = styled.div`
   flex-direction: column;
   border-right: 1px solid #C492F1;
   width: 16vw;
-  height: 93vh;
+  height: 95vh;
   padding: 20px;
   gap: 10px;
 `;
@@ -43,10 +43,10 @@ export const MenuWrapper = styled.div`
   flex-direction: column;
   gap: 10px;
 
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE, Edge */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
   &::-webkit-scrollbar {
-    display: none; /* Chrome, Safari, Opera */
+    display: none;
   }
 `;
 
