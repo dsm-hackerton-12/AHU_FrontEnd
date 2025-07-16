@@ -4,6 +4,7 @@ import Profile from "./pages/MyPage";
 import Vote from "./pages/Vote";
 import Home from "./pages/home";
 import Search from "./pages/Search";
+import AddWord from "./pages/AddWord";
 
 export default function Router() {
   return (
@@ -14,6 +15,7 @@ export default function Router() {
           <Route path="/My" element={<Profile />} />
           <Route path="/vote" element={<Vote />} />
           <Route path="/search" element={<Search />} />
+          <Route path="/write" element={<AddWord />} />
         </Route>
       </Routes>
     </BrowserRouter>

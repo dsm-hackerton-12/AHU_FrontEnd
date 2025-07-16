@@ -3,7 +3,7 @@ import styled from "@emotion/styled"
 import Img from "../../assets/SVG/SearchGraphImg.svg"
 
 function RecommendKeyword() {
-  return(
+  return (
     <RecommendKeywordContainer>
       <GraphImg src={Img}></GraphImg>
       <RecommendTitle>추천 키워드</RecommendTitle>
@@ -19,16 +19,16 @@ function RecommendKeyword() {
 }
 
 const RecommendKeywordContainer = styled.div`
-  width: 60vw;
+  width: 56vw;
   border: 3px solid #D8ADFF;
   border-radius: 30px;
-  padding: 2vw
-`
+  padding: 2vw;
+`;
 
 const GraphImg = styled.img`
   width: 29px;
   height: 26px;
-`
+`;
 
 const RecommendTitle = styled.h2`
   display: inline-block;
@@ -55,6 +55,14 @@ const Keyword = styled.span`
   background-color: #F1E8FF;
   color: #9334E9;
   border-radius: 20px;
-`
+  text-overflow: ellipsis;
+
+  &:hover {
+    cursor: pointer;
+    color: white;
+    background-color: #c393f0;
+
+  }
+`;
 
 export default RecommendKeyword;
