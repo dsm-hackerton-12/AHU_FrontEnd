@@ -40,7 +40,7 @@ function WordInfo() {
               {optionArr.map(e => {
                 return (
                   <>
-                    <Option>{e}</Option>
+                    <Option onClick={() => {DropDownClose(e)}}>{e}</Option>
                   </>
                 )
               })}
