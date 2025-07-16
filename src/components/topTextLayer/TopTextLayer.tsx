@@ -14,10 +14,14 @@ function TopTextLayer({title, text}: Props) {
   )
 }
   const TopContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     width: 60vw;
+    height: 15vh;
     border: 3px solid #D8ADFF;
     border-radius: 30px;
-    padding: 2vw;
+    /* padding: 2vw; */
   `
 
   const  TopTitle = styled.h2`

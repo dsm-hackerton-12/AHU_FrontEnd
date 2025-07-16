@@ -57,7 +57,7 @@ function WordInfo() {
 }
 
 const WordInfoContainer = styled.div`
-  width: 1268px;
+  width: 60vw;
   border: 3px solid #D8ADFF;
   border-radius: 30px;
 `

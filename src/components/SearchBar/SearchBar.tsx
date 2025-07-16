@@ -14,7 +14,7 @@ export default function() {
 }
 
 const Container = styled.div`
-  width: 64vw;
+  width: 60vw;
   align-items: stretch;
   display: flex;
   padding: 1vw 0 1vw 0;
@@ -23,7 +23,7 @@ const Container = styled.div`
 
 const SearchContainer = styled.div`
   border-radius: 15px;
-  border: 1px solid #8338E9;
+  border: 1px solid #D8ADFF;
   padding: 1vw 2vw;
   width: 60vw;
   display: flex;

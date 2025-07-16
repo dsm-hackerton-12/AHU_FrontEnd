@@ -8,6 +8,7 @@ const Wrapper = styled.div`
   gap: 2vh;
   overflow: auto;
   flex: 1;
+  padding: 3vh 3vw;
 `
 
 export default function Home() {

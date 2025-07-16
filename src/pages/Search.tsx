@@ -9,12 +9,13 @@ const Wrapper = styled.div`
   gap: 2vh;
   overflow: auto;
   flex: 1;
+  padding: 3vh 3vw;
 `
 
 export default function Search() {
   return (
     <Wrapper>
-      <TopTextLayer text="검색" title="원하는 단어나 용어를 검색해보세요." />
+      <TopTextLayer text="원하는 단어나 용어를 검색해보세요." title="검색 " />
       <SearchBar />
       <RecommendKeyword />
     </Wrapper>
