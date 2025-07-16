@@ -17,6 +17,6 @@ export default function Vote() {
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 80px 0 0 50px;
+  padding: 3vh 3vw;
   gap: 30px;
 `;

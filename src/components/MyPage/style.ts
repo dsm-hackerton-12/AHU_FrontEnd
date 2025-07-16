@@ -4,14 +4,14 @@ export const ProfileBox = styled.div`
   display: flex;
   align-items: center;
   background-color: #c49de8;
-  width: 60vw;
+  width: 56vw;
   height: 10vh;
   padding: 0 2vw;
   gap: 10px;
   border-radius: 30px;
   color: white;
   font-weight: 700;
-  font-size: 15px;
+  font-size: 18px;
 `;
 
 export const NameEdit = styled.div`

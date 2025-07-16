@@ -22,7 +22,7 @@ const Container = styled.div`
 `
 
 const SearchContainer = styled.div`
-  border-radius: 15px;
+  border-radius: 30px;
   border: 1px solid #D8ADFF;
   padding: 1vw 2vw;
   width: 60vw;

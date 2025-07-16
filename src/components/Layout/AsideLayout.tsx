@@ -4,7 +4,7 @@ import { Outlet } from "react-router-dom";
 
 export default function AsideLayout() {
   return (
-    <div style={{ display: "flex", height: "100vh" }}>
+    <div style={{ display: "flex" }}>
       <Aside />
       <div style={{ flex: 1, background: "#fff" }}>
         <Outlet />

@@ -5,6 +5,8 @@ import Logo from "../Logo/Index";
 import { asideIcons } from "./asideIcons";
 import Profile from "./Profile";
 import Logout from "./LogOut";
+import Login from "./Login";
+import { Cookie } from "../../utils/cookie";
 import { useNavigate } from "react-router-dom";
 import Modal from "../Modal/Modal";
 
@@ -13,6 +15,8 @@ export default function Aside() {
   const [openModal, setOpenModal] = useState<boolean>(false);
   const modalRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
+
+  const isLoggedIn = !!Cookie.get("token");
 
   const closeModal = (e: React.MouseEvent) => {
     if (e.target === modalRef.current) {
@@ -46,10 +50,12 @@ export default function Aside() {
           );
         })}
       </S.MenuWrapper>
-      <S.ProfileContainer onClick={() => setOpenModal(true)}>
-        <Profile />
-      </S.ProfileContainer>
-      <Logout />
+      {isLoggedIn && (
+        <S.ProfileContainer onClick={() => setOpenModal(true)}>
+          <Profile />
+        </S.ProfileContainer>
+      )}
+      {isLoggedIn ? <Logout /> : <Login />}
       {openModal && <Modal ref={modalRef} onClose={closeModal} />}
     </S.Container>
   );
