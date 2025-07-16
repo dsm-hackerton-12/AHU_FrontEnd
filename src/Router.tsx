@@ -1,12 +1,9 @@
-import {BrowserRouter, Routes, Route} from "react-router-dom"
-import TopTextLayer from "./components/topTextLayer/TopTextLayer"
-import RecommendKeywrod from "./components/recommendKeyword/RecommedKeyword"
-import styled from "@emotion/styled"
 import { BrowserRouter, Routes, Route } from "react-router-dom"
-import Home from "./pages/Home"
-import Aside from "./components/Aside/Index"
-import WordInfo from "./components/wordInfo/WordInfo"
-import Search from "./pages/Search"
+import TopTextLayer from "./components/topTextLayer/TopTextLayer";
+import AsideLayout from "./components/Layout/AsideLayout";
+import Profile from "./pages/MyPage";
+import BarGraph from "./components/Graph/Index";
+import Vote from "./pages/Vote";
 
 const Body = styled.div`
   display: flex;
@@ -18,10 +15,10 @@ export default function Router() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/t" element={<TopTextLayer title="이선우" text="공부해" />} />
-        <Route path="/r" element={<RecommendKeywrod />}></Route>
-        <Route path="/" element={<Aside />} />
-        <Route path="/w" element={<WordInfo />}></Route>
+        <Route element={<AsideLayout />} >
+          <Route path="/My" element={<Profile />} />
+          <Route path="/vote" element={<Vote />} />
+        </Route>
       </Routes>
       <Body>
         <Aside />
