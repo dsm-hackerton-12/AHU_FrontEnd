@@ -101,14 +101,14 @@ const WordInput = styled.input`
   color: #64758B;
   border: 1px solid #E5CCFE;
   border-radius: 15px;
-  width: 1120px;
+  width: 1020px;
   height: 70px;
   outline: none;
 `
 const CategoryInput = styled.div`
   border: 1px solid #E5CCFE;
   border-radius: 15px;
-  width: 1120px;
+  width: 1020px;
   height: 70px;
   display: flex;
   align-items: center;
