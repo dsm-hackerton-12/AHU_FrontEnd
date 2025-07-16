@@ -55,7 +55,7 @@ export default function Aside() {
           <Profile />
         </S.ProfileContainer>
       )}
-      {isLoggedIn ? <Logout /> : <Login />}
+      {isLoggedIn ? <Logout /> : <Login onClick={() => setOpenModal(true)} />}
       {openModal && <Modal ref={modalRef} onClose={closeModal} />}
     </S.Container>
   );
