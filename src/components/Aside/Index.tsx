@@ -1,13 +1,22 @@
 // Aside.tsx
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import * as S from "./style";
 import Logo from "../Logo/Index";
 import { asideIcons } from "./asideIcons";
 import Profile from "./Profile";
 import Logout from "./LogOut";
+import Modal from "../Modal/Modal";
 
 export default function Aside() {
   const [selected, setSelected] = useState<string>("home");
+  const [openModal, setOpenModal] = useState<boolean>(false);
+  const modalRef = useRef<HTMLDivElement>(null);
+
+  const closeModal = (e: React.MouseEvent) => {
+    if (e.target === modalRef.current) {
+      setOpenModal(false);
+    }
+  }
 
   return (
     <S.Container>
@@ -27,10 +36,11 @@ export default function Aside() {
           );
         })}
       </S.MenuWrapper>
-      <S.ProfileContainer>
+      <S.ProfileContainer onClick={() => setOpenModal(true)}>
         <Profile />
       </S.ProfileContainer>
       <Logout />
+      {openModal && <Modal ref={modalRef} onClose={closeModal} />}
     </S.Container>
   );
 }
