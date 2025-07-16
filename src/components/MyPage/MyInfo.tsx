@@ -9,6 +9,7 @@ export default function MyProfile() {
   const [userName, setUserName] = useState("userName");
   const [tempName, setTempName] = useState(userName);
   const inputRef = useRef<HTMLInputElement>(null);
+  const [value, setValue] = useState('');
 
   useEffect(() => {
     if (isEditing && inputRef.current) {
@@ -23,11 +24,17 @@ export default function MyProfile() {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTempName(e.target.value);
+    setValue(e.target.value);
   };
 
   const handleSave = () => {
+    if (value && value.trim() !== ''){
     setUserName(tempName);
     setIsEditing(false);
+    }
+    else{
+      alert("공백을 입력할 수 없습니다.");
+    }
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {

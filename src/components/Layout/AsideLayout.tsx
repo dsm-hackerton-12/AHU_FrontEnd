@@ -1,14 +1,15 @@
 import React from "react";
 import Aside from "../Aside/Index";
 import { Outlet } from "react-router-dom";
+import * as S from "./style";
 
 export default function AsideLayout() {
   return (
-    <div style={{ display: "flex" }}>
+    <S.LayoutWrapper>
       <Aside />
-      <div style={{ flex: 1, background: "#fff" }}>
+      <S.OutletWrapper>
         <Outlet />
-      </div>
-    </div>
+      </S.OutletWrapper>
+    </S.LayoutWrapper>
   );
 } 
