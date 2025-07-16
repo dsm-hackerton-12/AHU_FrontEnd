@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "@emotion/styled"
 import WordInfo from "../components/wordInfo/WordInfo";
 import TopTextLayer from "../components/topTextLayer/TopTextLayer";
