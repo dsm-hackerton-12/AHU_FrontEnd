@@ -21,7 +21,6 @@ function TopTextLayer({title, text}: Props) {
     height: 15vh;
     border: 3px solid #D8ADFF;
     border-radius: 30px;
-    /* padding: 2vw; */
   `
 
   const  TopTitle = styled.h2`

@@ -5,7 +5,7 @@ export const OuterWrapper = styled.div`
   align-items: center;
   justify-content: flex-start;
   gap: 32px;
-  width: 65vw;
+  width: 60vw;
 `;
 
 export const Side = styled.div`

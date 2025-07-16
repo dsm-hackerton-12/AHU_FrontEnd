@@ -1,4 +1,4 @@
-import React from "react";
+
 import * as S from "./style"
 import ProfileImg from "../../assets/SVG/Profile.svg"
 

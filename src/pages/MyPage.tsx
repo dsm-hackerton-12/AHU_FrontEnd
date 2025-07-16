@@ -22,7 +22,7 @@ export default function Profile() {
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 80px 0 0 50px;
+  padding: 3vh 3vw;
   gap: 30px;
 `;
 
@@ -33,7 +33,7 @@ const MyPost = styled.div`
   gap: 10px;
   border-radius: 30px;
   background-color: #fff2f9;
-  width: 60vw;
+  width: 56vw;
   height: 9vh;
   padding: 0 2vw;
 `;
