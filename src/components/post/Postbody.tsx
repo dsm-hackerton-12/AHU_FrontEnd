@@ -31,7 +31,7 @@ export default function PostBody() {
       <S.TagsContainer>
         {mock.map((tag) => {
           return (
-            <S.Tag>{tag}</S.Tag>
+            <S.Tag key={tag}>{tag}</S.Tag>
           )}
         )}
       </S.TagsContainer>

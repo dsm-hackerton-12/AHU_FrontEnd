@@ -6,17 +6,16 @@ import { asideIcons } from "./asideIcons";
 import Profile from "./Profile";
 import Logout from "./LogOut";
 import Login from "./Login";
-import { Cookie } from "../../utils/cookie";
 import { useNavigate } from "react-router-dom";
 import Modal from "../Modal/Modal";
+import { useUserStore } from "../../stores/useUserStore";
 
 export default function Aside() {
   const [selected, setSelected] = useState<string>("home");
   const [openModal, setOpenModal] = useState<boolean>(false);
+  const { isLoggedIn } = useUserStore();
   const modalRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
-
-  const isLoggedIn = !!Cookie.get("token");
 
   const closeModal = (e: React.MouseEvent) => {
     if (e.target === modalRef.current) {
@@ -51,11 +50,11 @@ export default function Aside() {
         })}
       </S.MenuWrapper>
       {isLoggedIn && (
-        <S.ProfileContainer onClick={() => setOpenModal(true)}>
+        <S.ProfileContainer>
           <Profile />
         </S.ProfileContainer>
       )}
-      {isLoggedIn ? <Logout /> : <Login />}
+      {isLoggedIn ? <Logout /> : <Login onClick={() => setOpenModal(true)}/>}
       {openModal && <Modal ref={modalRef} onClose={closeModal} />}
     </S.Container>
   );
