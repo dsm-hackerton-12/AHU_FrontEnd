@@ -37,13 +37,7 @@ function WordInfo() {
           </CategoryInput>
           {category && (
             <OptionBox>
-              {optionArr.map(e => {
-                return (
-                  <>
-                    <Option>{e}</Option>
-                  </>
-                )
-              })}
+              {optionArr.map(e => <Option onClick={() => {DropDownClose(e)}}>{e}</Option>)}
             </OptionBox>)}
         </FormBox>
         <FormBox>
