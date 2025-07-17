@@ -54,9 +54,6 @@ export default function PostBody({ id, word, description, name, createTime }: Po
     <S.Container>
       <S.ProfileContainer>
         <S.Profile />
-        <S.LightningIcon>
-          <Icon.LightningIconSVG />
-        </S.LightningIcon>
         <S.UserInfo>
           <S.Name>{name}</S.Name>
           <S.PostInfo>
