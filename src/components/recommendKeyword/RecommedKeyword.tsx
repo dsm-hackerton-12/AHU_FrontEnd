@@ -2,17 +2,23 @@ import React from "react";
 import styled from "@emotion/styled"
 import Img from "../../assets/SVG/SearchGraphImg.svg"
 
-function RecommendKeyword() {
+interface RecommendKeywordProps {
+  onKeywordClick: (keyword: string) => void;
+}
+
+function RecommendKeyword({ onKeywordClick }: RecommendKeywordProps) {
+  const keywords = ["API", "UXUI", "클라우드", "블록체인", "빅데이터"];
+
   return (
     <RecommendKeywordContainer>
       <GraphImg src={Img}></GraphImg>
       <RecommendTitle>추천 키워드</RecommendTitle>
       <RecommendKeywordBox>
-        <Keyword>API</Keyword>
-        <Keyword>UXUI</Keyword>
-        <Keyword>클라우드</Keyword>
-        <Keyword>블록체인</Keyword>
-        <Keyword>빅데이터</Keyword>
+        {keywords.map((keyword) => (
+          <Keyword key={keyword} onClick={() => onKeywordClick(keyword)}>
+            {keyword}
+          </Keyword>
+        ))}
       </RecommendKeywordBox>
     </RecommendKeywordContainer>
   )

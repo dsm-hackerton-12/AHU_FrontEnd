@@ -2,11 +2,7 @@ import { instance } from "./axios";
 
 // OAuth2 Test
 export const getOauth2TestConfig = async () => {
-  return await instance.get("/api/oauth2/test/config", {
-    headers: {
-      "Content-Type": "application/json"
-    }
-  });
+  return await instance.get("/api/oauth2/test/config");
 };
 
 // Word
@@ -15,12 +11,21 @@ export const getWordSearch = async (query: string) => {
 };
 
 // User
-export const patchUserNickname = async (nickname: string) => {
-  return await instance.patch("/user/nickname", { nickname });
+export const patchUserNickname = async (name: string) => {
+  return await instance.patch("/user/nickname", { name: name });
 };
 
+export const getUserFeeds = async () => {
+  return await instance.get("/user");
+}
+
+// Statistics
+export const getStatistics = async () => {
+  return await instance.get(`/api/statistics/overall`);
+}
+
 // Feed
-export const postFeed = async (wordId: string, feed: { content: string }) => {
+export const postFeed = async (wordId: string, feed: { description: string }) => {
   return await instance.post(`/api/feed/${wordId}`, feed);
 };
 
@@ -36,10 +41,11 @@ export const patchFeedById = async (id: string, feed: { content: string }) => {
   return await instance.patch(`/api/feed/${id}`, feed);
 };
 
-export const getAllFeeds = async () => {
-  return await instance.get("/api/feed");
-};
-
-export const getAllUserFeeds = async (id: string) => {
+export const getWordFeeds = async (id: string) => {
   return await instance.get(`/api/feed/${id}/all`);
-};
+}
+
+// like
+export const getLikes = async (id: string) => {
+  return await instance.post(`likes/${id}`);
+}

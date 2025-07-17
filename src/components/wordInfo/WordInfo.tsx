@@ -1,22 +1,69 @@
 import { useState } from "react"
 import styled from "@emotion/styled"
 import Img from "../../assets/SVG/BookImg.svg"
+import { postFeed, getWordSearch } from "../../apis"
+
+interface WordSearchResult {
+  id: string;
+  word: string;
+  description: string;
+  createTime: string;
+  updateTime: string;
+}
 
 function WordInfo() {
-  const [Inputvalue, setInputValue] = useState('')
-  const [categoryText, setCategoryText] = useState(true)
-  const [category, setCategory] = useState(false)
-  const optionArr = ["개발", "디자인", "비지니스", "기술", "마케팅", "기타"]
+  const [wordInput, setWordInput] = useState('');
+  const [wordSearchResults, setWordSearchResults] = useState<WordSearchResult[]>([]);
+  const [selectedWordDefinition, setSelectedWordDefinition] = useState<WordSearchResult | null>(null);
+  const [feedDescriptionInput, setFeedDescriptionInput] = useState('');
+  const [isCategoryOpen, setIsCategoryOpen] = useState(false);
 
-  function DropDownOpen() {
-    setCategory(true);
-  }
+  const handleWordSearch = async () => {
+    if (wordInput.trim() === '') {
+      setWordSearchResults([]);
+      setSelectedWordDefinition(null);
+      setFeedDescriptionInput('');
+      return;
+    }
+    try {
+      const response = await getWordSearch(wordInput);
+      setWordSearchResults(response.data);
+      setIsCategoryOpen(true); // Open dropdown with search results
+    } catch (error) {
+      console.error('단어 검색 실패:', error);
+      setWordSearchResults([]);
+    }
+  };
 
-  function DropDownClose(value: string) {
-    setCategory(false);
-    setCategoryText(false);
-    setInputValue(value)
-  }
+  const handleDefinitionSelect = (definition: WordSearchResult) => {
+    setSelectedWordDefinition(definition);
+    setIsCategoryOpen(false);
+  };
+
+  const handleSubmit = async () => {
+    if (!selectedWordDefinition) {
+      alert('단어를 선택해주세요.');
+      return;
+    }
+    if (feedDescriptionInput.trim() === '') {
+      alert('단어 설명을 입력해주세요.');
+      return;
+    }
+
+    try {
+      await postFeed(selectedWordDefinition.id, { description: feedDescriptionInput });
+      alert('피드가 성공적으로 등록되었습니다!');
+      // Reset form
+      setWordInput('');
+      setWordSearchResults([]);
+      setSelectedWordDefinition(null);
+      setFeedDescriptionInput('');
+      setIsCategoryOpen(false);
+    } catch (error) {
+      console.error('피드 등록 실패:', error);
+      alert('피드 등록에 실패했습니다.');
+    }
+  };
 
   return (
     <WordInfoContainer>
@@ -27,26 +74,49 @@ function WordInfo() {
       <FormContiner>
         <FormBox>
           <FormTitle>단어</FormTitle>
-          <WordInput type="text" placeholder="등록할 단어를 입력하세요"></WordInput>
+          <WordInput
+            type="text"
+            placeholder="등록할 단어를 입력하세요"
+            value={wordInput}
+            onChange={(e) => setWordInput(e.target.value)}
+            onBlur={handleWordSearch} // Trigger search on blur
+            onKeyDown={(e) => { if (e.key === 'Enter') handleWordSearch(); }}
+          ></WordInput>
         </FormBox>
         <FormBox>
           <FormTitle>카테고리</FormTitle>
-          <CategoryInput onClick={DropDownOpen}>
-            {categoryText && <CategoryInputText>카테고리를 입력하세요</CategoryInputText>}
-            {!categoryText && <CategoryInputText>{Inputvalue}</CategoryInputText>}
+          <CategoryInput onClick={() => setIsCategoryOpen(true)}>
+            <CategoryInputText>
+              {selectedWordDefinition ? `${selectedWordDefinition.description}` : "단어를 선택하세요"}
+            </CategoryInputText>
           </CategoryInput>
-          {category && (
+          {isCategoryOpen && wordSearchResults.length > 0 && (
             <OptionBox>
-              {optionArr.map(e => <Option onClick={() => {DropDownClose(e)}}>{e}</Option>)}
-            </OptionBox>)}
+              {wordSearchResults.map((item) => (
+                <Option key={item.id} onClick={() => handleDefinitionSelect(item)}>
+                  {item.word} - {item.description}
+                </Option>
+              ))}
+            </OptionBox>
+          )}
+          {isCategoryOpen && wordSearchResults.length === 0 && wordInput.trim() !== '' && (
+            <OptionBox>
+              <Option>검색 결과가 없습니다.</Option>
+            </OptionBox>
+          )}
         </FormBox>
         <FormBox>
           <FormTitle>단어 설명</FormTitle>
-          <WordInput type="text" placeholder="단어의 정의와 설명을 자세히 입력하세요"></WordInput>
+          <WordInput
+            type="text"
+            placeholder="단어의 정의와 설명을 자세히 입력하세요"
+            value={feedDescriptionInput}
+            onChange={(e) => setFeedDescriptionInput(e.target.value)}
+          ></WordInput>
         </FormBox>
       </FormContiner>
       <SubmitButtonBox>
-        <SubmitButton>등록하기</SubmitButton>
+        <SubmitButton onClick={handleSubmit}>등록하기</SubmitButton>
       </SubmitButtonBox>
     </WordInfoContainer>
   )
@@ -97,14 +167,14 @@ const WordInput = styled.input`
   color: #64758B;
   border: 1px solid #E5CCFE;
   border-radius: 15px;
-  width: 1020px;
+  width: 48vw;
   height: 70px;
   outline: none;
 `
 const CategoryInput = styled.div`
   border: 1px solid #E5CCFE;
   border-radius: 15px;
-  width: 1020px;
+  width: 48vw;
   height: 70px;
   display: flex;
   align-items: center;
@@ -118,14 +188,21 @@ const CategoryInputText = styled.span`
   font-weight: 400;
   padding: 0 25px;
   color: #64758B;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 `
+
 const Option = styled.span`
   box-sizing:border-box;
-  font-size: 25px;
+  font-size: 18px; /* Reduced font size */
   font-weight: 400;
   color: #575757;
-  width: 175px;
+  width: 250px;
   padding: 8px 0 7px 43px;
+  white-space: nowrap; /* Prevent text wrapping */
+  overflow: hidden;
+  text-overflow: ellipsis;
 
   &:hover{
     background-color: #FFF2F9;
@@ -138,7 +215,6 @@ const OptionBox = styled.div`
   top: 140px;
   z-index: 1;
   box-sizing: border-box;
-  width: 192px;
   display: flex;
   flex-direction: column;
   border: 3px solid #E5CCFE;

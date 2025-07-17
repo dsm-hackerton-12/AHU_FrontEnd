@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Cookie } from "../utils/cookie";
+import { useUserStore } from "../stores/useUserStore";
 
 export const instance = axios.create({
   baseURL: import.meta.env.VITE_BASE_URL,
@@ -8,8 +8,10 @@ export const instance = axios.create({
 
 instance.interceptors.request.use(
   (config) => {
-    const token = Cookie.get("token");
-    if (token) config.headers.Authorization = `Bearer ${token}`;
+    const accessToken = useUserStore.getState().accessToken;
+    if (accessToken && config.url !== "/api/oauth2/test/config") {
+      config.headers.Authorization = `Bearer ${accessToken}`;
+    }
     return config;
   },
   (err) => {

@@ -1,14 +1,26 @@
 import styled from "@emotion/styled"
 import Search from "../../assets/SVG/Search.svg"
+import { useState } from "react"
 
-export default function() {
+interface Props {
+  handleSearch: (query: string) => void
+}
+
+export default function SearchBar({handleSearch}: Props) {
+  const [query, setQuery] = useState<string>("");
+
   return (
     <Container>
       <SearchContainer>
         <img src={Search} alt="안녕" />
-        <SearchInput type="text" placeholder="검색할 단어를 입력하세요"/>
+        <SearchInput
+          type="text"
+          placeholder="검색할 단어를 입력하세요"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+        />
       </SearchContainer>
-      <Button>검색</Button>
+      <Button onClick={() => handleSearch(query)}>검색</Button>
     </Container>
   )
 }

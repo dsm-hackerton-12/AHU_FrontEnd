@@ -112,9 +112,5 @@ export const LikesContainer = styled.div`
   align-items: center;
   gap: 10px;
   color: #d8adff;
-`;
-
-export const LikeCount = styled.span`
-  font-size: 18px;
-  font-weight: 500;
+  margin-top: 10px;
 `;

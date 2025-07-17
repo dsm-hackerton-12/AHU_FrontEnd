@@ -3,13 +3,18 @@ import * as S from "./style"
 import ProfileImg from "../../assets/SVG/Profile.svg";
 import Edit from "../../assets/SVG/Edit.svg"
 import Check from "../../assets/SVG/Check.svg"
+import { patchUserNickname } from "../../apis";
+import { useUserStore } from "../../stores/useUserStore";
 
 export default function MyProfile() {
+  const userStore = useUserStore();
+  const initialUserName = userStore.name || "Guest";
+  const userEmail = userStore.email || "";
+
   const [isEditing, setIsEditing] = useState(false);
-  const [userName, setUserName] = useState("userName");
-  const [tempName, setTempName] = useState(userName);
+  const [userName, setUserName] = useState(initialUserName);
+  const [tempName, setTempName] = useState(initialUserName);
   const inputRef = useRef<HTMLInputElement>(null);
-  const [value, setValue] = useState('');
 
   useEffect(() => {
     if (isEditing && inputRef.current) {
@@ -24,16 +29,25 @@ export default function MyProfile() {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTempName(e.target.value);
-    setValue(e.target.value);
   };
 
-  const handleSave = () => {
-    if (value && value.trim() !== ''){
-    setUserName(tempName);
-    setIsEditing(false);
+  const handleSave = async () => {
+    if (tempName.trim() === '') {
+      alert("닉네임을 공백으로 설정할 수 없습니다.");
+      return;
     }
-    else{
-      alert("공백을 입력할 수 없습니다.");
+
+    try {
+      await patchUserNickname(tempName);
+      setUserName(tempName);
+      userStore.login(tempName, userEmail, userStore.accessToken || '', userStore.userId || ''); // Update store with new name
+      setIsEditing(false);
+      alert("닉네임이 성공적으로 변경되었습니다.");
+    } catch (error) {
+      console.error("Failed to update nickname:", error);
+      alert("닉네임 변경에 실패했습니다.");
+      setTempName(userName); // Revert to original name on error
+      setIsEditing(false);
     }
   };
 
@@ -79,7 +93,7 @@ export default function MyProfile() {
               </>
             )}
           </S.NameEdit>
-          <p>userEmail</p>
+          <p>{userEmail}</p>
         </div>
       </S.ProfileBox>
     </>

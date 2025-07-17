@@ -1,46 +1,80 @@
 import * as S from "./style";
 import * as Icon from "./postIcon"
+import { getLikes } from "../../apis";
 
-const mock = ["비즈니스", "기술"]
+interface PostBodyProps {
+  id: string;
+  word?: string; // Make word prop optional
+  description: string;
+  createTime: string;
+  name: string;
+}
 
-export default function PostBody() {
+const formatTimeAgo = (dateString: string): string => {
+  const now = new Date();
+  const past = new Date(dateString);
+  const diffSeconds = Math.floor((now.getTime() - past.getTime()) / 1000);
+
+  const minutes = Math.floor(diffSeconds / 60);
+  const hours = Math.floor(minutes / 60);
+  const days = Math.floor(hours / 24);
+  const months = Math.floor(days / 30);
+  const years = Math.floor(days / 365);
+
+  if (years > 0) {
+    return `${years}년 전`;
+  } else if (months > 0) {
+    return `${months}개월 전`;
+  } else if (days > 0) {
+    return `${days}일 전`;
+  } else if (hours > 0) {
+    return `${hours}시간 전`;
+  } else if (minutes > 0) {
+    return `${minutes}분 전`;
+  } else {
+    return `방금 전`;
+  }
+};
+
+export default function PostBody({ id, word, description, name, createTime }: PostBodyProps) {
+  const timeAgo = formatTimeAgo(createTime);
+
+  const handleLikeClick = async () => {
+    try {
+      await getLikes(id);
+      alert("좋아요가 반영되었습니다!");
+      // You might want to update the like count here based on API response
+    } catch (error) {
+      console.error("Failed to like:", error);
+      alert("좋아요 반영에 실패했습니다.");
+    }
+  };
+
   return (
     <S.Container>
       <S.ProfileContainer>
-        <S.ProfileImageWrapper>
-          <S.Profile />
-          <S.LightningIcon>
-            <Icon.LightningIconSVG />
-          </S.LightningIcon>
-        </S.ProfileImageWrapper>
+        <S.Profile />
+        <S.LightningIcon>
+          <Icon.LightningIconSVG />
+        </S.LightningIcon>
         <S.UserInfo>
-          <S.Name>{"김개발"}</S.Name>
+          <S.Name>{name}</S.Name>
           <S.PostInfo>
             <S.Time>
               <Icon.ClockIcon />
-              {"2시간 전"}
+              {timeAgo}
             </S.Time>
-            <S.HotBadge>HOT</S.HotBadge>
           </S.PostInfo>
         </S.UserInfo>
       </S.ProfileContainer>
 
-      <S.Title>{"디지털 트랜스포메이션"}</S.Title>
-      <S.BodyText>{"가나다라마바사아자차카 타파하, 12조 화이팅"}</S.BodyText>
-
-      <S.TagsContainer>
-        {mock.map((tag) => {
-          return (
-            <S.Tag key={tag}>{tag}</S.Tag>
-          )}
-        )}
-      </S.TagsContainer>
+      <S.Title>{word}</S.Title>
+      <S.BodyText>{description}</S.BodyText>
 
       <S.Divider />
 
-      <S.LikesContainer>
+      <S.LikesContainer onClick={handleLikeClick} style={{ cursor: "pointer" }}>
         <Icon.HeartIcon />
-        <S.LikeCount>9</S.LikeCount>
       </S.LikesContainer>
     </S.Container>
   );

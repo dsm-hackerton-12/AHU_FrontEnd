@@ -54,6 +54,7 @@ export const ProfileContainer = styled.div`
   display: flex;
   align-items: center;
   gap: 10px;
+ margin-bottom: 10px;
 `
 
 export const ProfileUser = styled.div`
@@ -68,5 +69,6 @@ export const ProfileUser = styled.div`
 export const LogoutContainer = styled.div`
   display: flex;
   gap: 10px;
+  align-items: center;
   cursor: pointer;
 `

@@ -11,11 +11,11 @@ const AuthCallback = () => {
     const accessToken = searchParams.get("accessToken");
     const name = searchParams.get("name");
     const email = searchParams.get("email");
-    console.log(accessToken, name, email);
+    const userId = searchParams.get("userId");
 
-    if (accessToken && name && email) {
+    if (accessToken && name && email && userId) {
       navigator("/")
-      login(name, email, accessToken);
+      login(name, email, accessToken, userId);
     } else {
       console.error("Oauth 로그인에 실패했습니다.");
     }
